@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportZone - Unleash Your Inner Champion</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(135deg, #c31432 0%, #240b36 100%);
+            padding: 1rem 5%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+        
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            height: 90vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=1600') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #c31432 0%, #240b36 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(195,20,50,0.4);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(195,20,50,0.6);
+        }
+        
+        /* Section Styling */
+        section {
+            padding: 5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #240b36;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(135deg, #c31432 0%, #240b36 100%);
+            border-radius: 2px;
+        }
+        
+        /* Products Section */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #240b36;
+        }
+        
+        .product-info p {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #c31432;
+            margin-bottom: 1rem;
+        }
+        
+        .btn-small {
+            display: inline-block;
+            padding: 0.7rem 1.5rem;
+            background: linear-gradient(135deg, #c31432 0%, #240b36 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-small:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Login & Signup Forms */
+        .auth-container {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .form-card {
+            background: rgba(255,255,255,0.95);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 450px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .form-card h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #240b36;
+            font-size: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #c31432;
+        }
+        
+        .btn-submit {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #c31432 0%, #240b36 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(195,20,50,0.4);
+        }
+        
+        .form-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #666;
+        }
+        
+        .form-footer a {
+            color: #c31432;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #240b36;
+        }
+        
+        .about-text p {
+            margin-bottom: 1rem;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+                        url('https://images.unsplash.com/photo-1517649763962-0c623066013b?w=800') center/cover;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        .contact-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 3rem;
+            border-radius: 15px;
+            color: white;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-item {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .contact-item span {
+            font-size: 1.5rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #240b36 0%, #c31432 100%);
+            color: white;
+            padding: 3rem 5%;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #ddd;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-3px);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-content,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-card {
+                padding: 2rem;
+            }
+            
+            section {
+                padding: 3rem 5%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .nav-links a {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.8rem;
+            }
+            
+            .logo {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="nav-container">
+            <a href="#home" class="logo">⚡ SPORTZONE</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#login">Login</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Unleash Your Inner Champion</h1>
+            <p>Discover premium sports equipment and gear that helps you perform at your best. Quality meets passion.</p>
+            <a href="#products" class="btn">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products">
+        <h2 class="section-title">Featured Products</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">👟</div>
+                <div class="product-info">
+                    <h3>Pro Running Shoes</h3>
+                    <p>Lightweight running shoes with advanced cushioning technology for maximum comfort and performance.</p>
+                    <div class="product-price">$129.99</div>
+                    <a href="#" class="btn-small">Add to Cart</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">⚽</div>
+                <div class="product-info">
+                    <h3>Premium Football</h3>
+                    <p>Professional-grade football with superior grip and durability. Perfect for matches and training.</p>
+                    <div class="product-price">$49.99</div>
+                    <a href="#" class="btn-small">Add to Cart</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">🏏</div>
+                <div class="product-info">
+                    <h3>Cricket Bat Elite</h3>
+                    <p>Hand-crafted cricket bat made from premium English willow for exceptional power and control.</p>
+                    <div class="product-price">$199.99</div>
+                    <a href="#" class="btn-small">Add to Cart</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">🎾</div>
+                <div class="product-info">
+                    <h3>Tennis Racket Pro</h3>
+                    <p>Lightweight carbon fiber racket with excellent balance and power for competitive players.</p>
+                    <div class="product-price">$179.99</div>
+                    <a href="#" class="btn-small">Add to Cart</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">🏀</div>
+                <div class="product-info">
+                    <h3>Basketball Premium</h3>
+                    <p>Indoor/outdoor basketball with superior grip and bounce. Built to last through intense games.</p>
+                    <div class="product-price">$59.99</div>
+                    <a href="#" class="btn-small">Add to Cart</a>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">🏋️</div>
+                <div class="product-info">
+                    <h3>Fitness Dumbbells</h3>
+                    <p>Adjustable dumbbell set with non-slip grip. Perfect for home workouts and strength training.</p>
+                    <div class="product-price">$89.99</div>
+                    <a href="#" class="btn-small">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Section -->
+    <section id="login" class="auth-container">
+        <div class="form-card">
+            <h2>Login to Your Account</h2>
+            <form>
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn-submit">Login</button>
+                <div class="form-footer">
+                    Don't have an account? <a href="#signup">Sign up here</a>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Signup Section -->
+    <section id="signup" class="auth-container">
+        <div class="form-card">
+            <h2>Create New Account</h2>
+            <form>
+                <div class="form-group">
+                    <label for="signup-name">Full Name</label>
+                    <input type="text" id="signup-name" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email Address</label>
+                    <input type="email" id="signup-email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" placeholder="Create a password" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-confirm">Confirm Password</label>
+                    <input type="password" id="signup-confirm" placeholder="Confirm your password" required>
+                </div>
+                <button type="submit" class="btn-submit">Create Account</button>
+                <div class="form-footer">
+                    Already have an account? <a href="#login">Login here</a>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">About SportZone</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Your Trusted Sports Partner</h3>
+                <p>At SportZone, we believe that every athlete deserves access to premium quality sports equipment that enhances their performance and passion for the game.</p>
+                <p>Founded in 2020, we've been dedicated to providing top-tier sports gear from leading brands worldwide. Our commitment to quality, authenticity, and customer satisfaction has made us a trusted name among athletes and sports enthusiasts.</p>
+                <p>We carefully curate our product selection to ensure that every item meets our rigorous standards for performance, durability, and value. Whether you're a professional athlete or just starting your fitness journey, SportZone has everything you need to succeed.</p>
+                <p><strong>Our Mission:</strong> Empowering athletes worldwide with premium sports equipment and exceptional service.</p>
+            </div>
+            <div class="about-image"></div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <div class="contact-item">
+                    <span>📍</span>
+                    <div>
+                        <strong>Address</strong><br>
+                        123 Sports Avenue, Athletic City, AC 12345
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <span>📧</span>
+                    <div>
+                        <strong>Email</strong><br>
+                        info@sportzone.com
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <span>📞</span>
+                    <div>
+                        <strong>Phone</strong><br>
+                        +1 (555) 123-4567
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <span>⏰</span>
+                    <div>
+                        <strong>Hours</strong><br>
+                        Mon-Fri: 9:00 AM - 8:00 PM<br>
+                        Sat-Sun: 10:00 AM - 6:00 PM
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-card">
+                <h2>Send Us a Message</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="contact-name">Your Name</label>
+                        <input type="text" id="contact-name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-email">Your Email</label>
+                        <input type="email" id="contact-email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-subject">Subject</label>
+                        <input type="text" id="contact-subject" placeholder="What is this regarding?" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-message">Message</label>
+                        <input type="text" id="contact-message" placeholder="Write your message here..." required style="height: 100px;">
+                    </div>
+                    <button type="submit" class="btn-submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#products">Products</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+                <a href="#login">Login</a>
+            </div>
+            
+            <div class="social-icons">
+                <a href="#" class="social-icon">f</a>
+                <a href="#" class="social-icon">t</a>
+                <a href="#" class="social-icon">i</a>
+                <a href="#" class="social-icon">y</a>
+            </div>
+            
+            <p>&copy; 2025 SportZone. All rights reserved. | Unleash Your Inner Champion</p>
+        </div>
+    </footer>
+</body>
+</html>
